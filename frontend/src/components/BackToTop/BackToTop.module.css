@@ -1,0 +1,54 @@
+.backToTop {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgb(206, 150, 126); /* Terracotta theme color */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  outline: none;
+}
+
+.backToTop:hover {
+  background-color: #1c1b19;
+  transform: scale(1.05);
+}
+
+:global([data-theme="dark"]) .backToTop:hover {
+  background-color: #ffffff;
+  color: #1c1b19;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .backToTop {
+    bottom: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .backToTop {
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}

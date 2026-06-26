@@ -1,20 +1,21 @@
 [
   {
     "id": "ring-solitaire",
-    "name": "Classic Solitaire Diamond Engagement Ring",
+    "name": "Real Diamond Jewellery Gold Diamond Ring",
     "category": "rings",
-    "price": 1499,
-    "originalPrice": 1799,
+    "price": 300,
+    "originalPrice": 660,
+    "priceRange": "$300 - $660",
     "isNew": true,
     "isBestSeller": true,
     "isFeatured": true,
-    "rating": 4.9,
+    "rating": 4.0,
     "reviewCount": 42,
     "images": [
       "/images/products/ring_solitaire_1.png",
       "/images/products/ring_solitaire_2.png"
     ],
-    "description": "An exquisite 1-carat round brilliant cut diamond claw-set in an elegant 18k yellow gold band. A timeless symbol of your commitment.",
+    "description": "An exquisite round brilliant cut diamond claw-set in an elegant yellow gold band. A timeless symbol of your commitment.",
     "details": {
       "metal": "18k Yellow Gold",
       "purity": "91.6% Pure Gold",
@@ -26,24 +27,25 @@
   },
   {
     "id": "ring-emerald",
-    "name": "Vintage Emerald Eternity Band",
+    "name": "The Sinead Ring 18kt Diamond Yellow Gold Ring",
     "category": "rings",
-    "price": 2299,
-    "originalPrice": 2299,
-    "isNew": false,
+    "price": 250,
+    "originalPrice": 256,
+    "priceRange": "$250 - $256",
+    "isNew": true,
     "isBestSeller": true,
     "isFeatured": true,
-    "rating": 4.8,
+    "rating": 5.0,
     "reviewCount": 18,
     "images": [
       "/images/products/ring_emerald_1.png",
       "/images/products/ring_emerald_2.png"
     ],
-    "description": "Inspired by royal vintage aesthetics, this platinum band features alternating emerald-cut Colombian emeralds and diamonds.",
+    "description": "Inspired by royal vintage aesthetics, this beautiful floral-shaped ring features a cluster of diamonds on an 18kt yellow gold leaf band.",
     "details": {
-      "metal": "Platinum 950",
-      "purity": "95% Pure Platinum",
-      "gemstone": "Colombian Emeralds (1.5 ct) & Round Diamonds (0.8 ct)",
+      "metal": "18kt Yellow Gold",
+      "purity": "75% Pure Gold",
+      "gemstone": "Natural Diamonds (0.8 ct)",
       "weight": "4.8 grams",
       "size": "Standard Size 6 (Non-resizable)"
     },
@@ -51,28 +53,57 @@
   },
   {
     "id": "ring-rose-gold",
-    "name": "Rose Gold Floral Diamond Band",
+    "name": "Erina Solitaire Ring Kisna White Gold Ring",
     "category": "rings",
-    "price": 899,
-    "originalPrice": 1099,
+    "price": 280,
+    "originalPrice": 295,
+    "customBadge": "-5%",
+    "timer": "85d : 10h : 29m : 18s",
     "isNew": true,
     "isBestSeller": false,
-    "isFeatured": false,
-    "rating": 4.7,
+    "isFeatured": true,
+    "rating": 4.0,
     "reviewCount": 29,
     "images": [
       "/images/products/ring_rose_1.png",
       "/images/products/ring_rose_2.png"
     ],
-    "description": "Delicately crafted floral motifs studded with sparkling marquise diamonds on a warm 14k rose gold band. Perfect for daily luxury.",
+    "description": "A striking halo diamond stud setting on a split white gold shank. Modern luxury meets classical diamond jewelry.",
     "details": {
-      "metal": "14k Rose Gold",
+      "metal": "14k White Gold",
       "purity": "58.5% Pure Gold",
-      "gemstone": "Marquise Cut Diamonds (0.45 ct)",
+      "gemstone": "Diamonds (0.45 ct)",
       "weight": "2.9 grams",
       "size": "Standard Size 7 (Resizable)"
     },
     "stock": 12
+  },
+  {
+    "id": "ring-casual-thomas",
+    "name": "Casual Thomas Diamond Ring Yellow Gold",
+    "category": "rings",
+    "price": 140,
+    "originalPrice": 270,
+    "priceRange": "$140 - $270",
+    "customBadge": "-5%",
+    "isNew": true,
+    "isBestSeller": false,
+    "isFeatured": true,
+    "rating": 5.0,
+    "reviewCount": 14,
+    "images": [
+      "/images/products/ring_casual_1.png",
+      "/images/products/ring_casual_2.png"
+    ],
+    "description": "A clean square-cluster diamond ring in solid gold for casual and everyday luxury.",
+    "details": {
+      "metal": "18k Yellow Gold",
+      "purity": "75% Pure Gold",
+      "gemstone": "Natural Diamonds (0.3 ct)",
+      "weight": "2.5 grams",
+      "size": "Standard Size 7 (Resizable)"
+    },
+    "stock": 8
   },
   {
     "id": "necklace-duchess",
@@ -298,5 +329,89 @@
       "diameter": "Resizable Open Cuff"
     },
     "stock": 14
+  },
+  {
+    "id": "featured-ring-1",
+    "name": "The Sinead Ring 18kt Diamond Yellow Gold Ring",
+    "category": "rings",
+    "price": 250,
+    "originalPrice": 256,
+    "rating": 4.0,
+    "reviewCount": 18,
+    "images": [
+      "/images/featured_ring_1.png"
+    ],
+    "description": "A beautiful gold swirl cluster diamond ring styled in 18kt gold, featuring round brilliant-cut diamonds.",
+    "details": {
+      "metal": "18kt Yellow Gold",
+      "purity": "75% Pure Gold",
+      "gemstone": "Natural Diamonds (0.8 ct)",
+      "weight": "4.8 grams",
+      "size": "Standard Size 6 (Non-resizable)"
+    },
+    "stock": 4
+  },
+  {
+    "id": "featured-earring-1",
+    "name": "Beautiful Diamond Ximena Earring Rose Gold",
+    "category": "earrings",
+    "price": 140,
+    "originalPrice": 230,
+    "rating": 4.0,
+    "reviewCount": 12,
+    "images": [
+      "/images/featured_earring_1.png"
+    ],
+    "description": "Dangling tear-drop emerald earrings framed by brilliant diamonds, cast in rose gold.",
+    "details": {
+      "metal": "14kt Rose Gold",
+      "purity": "58.5% Pure Gold",
+      "gemstone": "Emeralds & Diamonds (0.65 ct)",
+      "weight": "3.2 grams",
+      "closure": "Push Back"
+    },
+    "stock": 9
+  },
+  {
+    "id": "featured-earring-2",
+    "name": "Beautiful Diamond Stud Eulla Earring Rose Gold",
+    "category": "earrings",
+    "price": 210,
+    "originalPrice": 300,
+    "rating": 4.0,
+    "reviewCount": 24,
+    "images": [
+      "/images/featured_earring_2.png"
+    ],
+    "description": "Leaf-patterned stud earrings featuring brilliant-cut diamonds cluster set in rose gold.",
+    "details": {
+      "metal": "14kt Rose Gold",
+      "purity": "58.5% Pure Gold",
+      "gemstone": "Brilliant-cut Diamonds (0.75 ct)",
+      "weight": "3.8 grams",
+      "closure": "Secure Screw Back"
+    },
+    "stock": 6
+  },
+  {
+    "id": "featured-bangle-1",
+    "name": "Beautiful Diamond Gold Bangle",
+    "category": "bracelets",
+    "price": 190,
+    "originalPrice": 210,
+    "rating": 4.0,
+    "reviewCount": 16,
+    "images": [
+      "/images/featured_bangle_1.png"
+    ],
+    "description": "A luxury gold diamond bangle styled with three rows of princess cut diamonds.",
+    "details": {
+      "metal": "18kt Yellow Gold",
+      "purity": "75% Pure Gold",
+      "gemstone": "Princess Cut Diamonds (0.5 ct)",
+      "weight": "8.5 grams",
+      "size": "2.4 inches (Standard)"
+    },
+    "stock": 3
   }
 ]

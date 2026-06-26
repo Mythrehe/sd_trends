@@ -1,0 +1,101 @@
+.themeSwitch {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+}
+
+.switchContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 72px;
+  height: 38px;
+  background-color: #1e1e1c; /* Charcoal black */
+  border-radius: 20px;
+  padding: 4px;
+  transition: background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+}
+
+:global([data-theme="dark"]) .switchContainer {
+  background-color: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.1);
+}
+
+.thumb {
+  position: absolute;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  color: #1e1e1c;
+}
+
+:global([data-theme="dark"]) .thumb {
+  transform: translateX(34px);
+  background-color: #1e1e1c;
+  color: #ffffff;
+}
+
+.thumbIcon {
+  animation: rotateIn 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.iconSlot {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-gold);
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+:global([data-theme="dark"]) .iconSlot {
+  right: auto;
+  left: 12px;
+}
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-45deg) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .themeSwitch {
+    bottom: 20px;
+    left: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .themeSwitch {
+    bottom: 16px;
+    left: 16px;
+    transform: scale(0.9);
+    transform-origin: bottom left;
+  }
+}

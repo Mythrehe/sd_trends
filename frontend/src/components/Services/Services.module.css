@@ -1,8 +1,6 @@
 .section {
-  padding: 3rem 0;
+  padding: 1.5rem 0;
   background-color: var(--bg-surface);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
   transition: background-color var(--transition-medium), border-color var(--transition-medium);
 }
 
@@ -19,11 +17,27 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    gap: 2rem;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  .grid::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+  .item {
+    flex: 0 0 70%;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    gap: 0.75rem;
   }
 }
 
@@ -33,31 +47,12 @@
   gap: 1.25rem;
 }
 
-@media (max-width: 576px) {
-  .item {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-}
-
 .iconWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--bg-secondary);
-  color: var(--accent-gold);
+  color: var(--text-primary);
   flex-shrink: 0;
-  transition: all var(--transition-medium);
-}
-
-.item:hover .iconWrapper {
-  background-color: var(--accent-gold);
-  color: #1C1B19;
-  transform: rotateY(180deg);
 }
 
 .info {
@@ -66,16 +61,46 @@
 }
 
 .title {
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: var(--font-roboto), sans-serif !important;
+  font-weight: 500;
   font-size: 0.95rem;
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
   color: var(--text-primary);
+  text-transform: uppercase;
 }
 
 .desc {
+  font-family: var(--font-roboto), sans-serif !important;
   font-size: 0.8rem;
   color: var(--text-secondary);
   line-height: 1.4;
+}
+
+.progressBarWrapper {
+  display: none;
+  width: 100%;
+  max-width: 120px;
+  height: 4px;
+  background-color: #E6E4DF;
+  margin: 1.5rem auto 0 auto;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progressBar {
+  position: absolute;
+  top: 0;
+  width: 30%;
+  height: 100%;
+  background-color: #9C9994;
+  border-radius: 2px;
+  transition: left 0.1s ease-out;
+}
+
+@media (max-width: 768px) {
+  .progressBarWrapper {
+    display: block;
+  }
 }

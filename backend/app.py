@@ -817,6 +817,7 @@ def send_smtp_email(to_email, subject, body_text):
 
 def notify_admin_of_new_order(order, user, items):
     admin_email = 'karthikrajay.cc@gmail.com'
+    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
     
     items_list_str = ""
     for item in items:
@@ -841,11 +842,12 @@ Items Ordered:
 {items_list_str}
 
 Please review the payment and update the status in the Admin Dashboard:
-http://localhost:3000/admin/orders
+{frontend_url}/admin/orders
 """
     send_smtp_email(admin_email, subject, body)
 
 def notify_customer_order_verified(order, user):
+    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
     subject = f"Your SD Trends Order #{order.id} has been confirmed!"
     body = f"""Dear {user.name},
 
@@ -854,7 +856,7 @@ Thank you for your purchase! We have successfully verified your payment of ₹{o
 Your order has been confirmed and is now being processed.
 
 You can view your order status, items ordered, and progress on our website:
-http://localhost:3000/checkout/status?order_id={order.id}
+{frontend_url}/checkout/status?order_id={order.id}
 
 Best regards,
 SD Trends Team
@@ -862,6 +864,7 @@ SD Trends Team
     send_smtp_email(user.email, subject, body)
 
 def notify_customer_order_declined(order, user):
+    frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
     subject = f"Payment Verification Failed for SD Trends Order #{order.id}"
     body = f"""Dear {user.name},
 
@@ -870,7 +873,7 @@ We are writing to inform you that we were unable to verify your payment of ₹{o
 As a result, your order has been declined (Payment not done).
 
 You can review your order status and attempt payment again on our website:
-http://localhost:3000/checkout/status?order_id={order.id}
+{frontend_url}/checkout/status?order_id={order.id}
 
 Best regards,
 SD Trends Team

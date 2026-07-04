@@ -864,6 +864,7 @@ def send_smtp_email(to_email, subject, body_text):
 
         # Resend's free tier default domain is 'onboarding@resend.dev'
         sender = os.environ.get("MAIL_DEFAULT_SENDER", "onboarding@resend.dev")
+        print(f"sender: {sender}")
 
         url = "https://api.resend.com/emails"
         headers = {
@@ -901,8 +902,9 @@ def send_smtp_email(to_email, subject, body_text):
     smtp_password = os.environ.get("SMTP_PASSWORD")
     sender = os.environ.get(
         "MAIL_DEFAULT_SENDER",
-        smtp_username if smtp_username else "karthikrajay.cc@gmail.com",
+        smtp_username,
     )
+    print(f"sender: {sender}")
 
     if not smtp_username or not smtp_password:
         print(
@@ -1223,10 +1225,10 @@ otp_store = {}
 
 def send_otp_email(to_email, otp):
     sender = os.environ.get("MAIL_DEFAULT_SENDER", "noreply@sdtrends.com")
+    print(f"sender: {sender}")
 
-    # 1. Try Brevo (Sendinblue) HTTP API (Best for Render free tier, no port blocking)
+    # 1. Try Brevo HTTP API (Best for Render free tier, no port blocking)
     brevo_api_key = os.environ.get("BREVO_API_KEY")
-    print(f"brevo_api_key: {brevo_api_key}")
     if brevo_api_key:
         import urllib.request
         import json
@@ -1256,41 +1258,7 @@ def send_otp_email(to_email, otp):
         except Exception as e:
             print(f"Failed to send email via Brevo API: {e}")
             # DO NOT return False here, allow it to fallback to the next method!
-    # 2. Try SendGrid HTTP API (Alternative for Render free tier)
-    sendgrid_api_key = os.environ.get("SENDGRID_API_KEY")
-    if sendgrid_api_key:
-        import urllib.request
-        import json
 
-        url = "https://api.sendgrid.com/v3/mail/send"
-        headers = {
-            "Authorization": f"Bearer {sendgrid_api_key}",
-            "Content-Type": "application/json",
-        }
-        data = {
-            "personalizations": [{"to": [{"email": to_email}]}],
-            "from": {"email": sender, "name": "SD Trends"},
-            "subject": "Your SD Trends Verification Code",
-            "content": [
-                {
-                    "type": "text/html",
-                    "value": f"<html><body><p>Your SD Trends Verification Code is: <strong>{otp}</strong></p><p>Please do not share this code with anyone.</p></body></html>",
-                }
-            ],
-        }
-        try:
-            req = urllib.request.Request(
-                url,
-                data=json.dumps(data).encode("utf-8"),
-                headers=headers,
-                method="POST",
-            )
-            with urllib.request.urlopen(req) as response:
-                print(f"Successfully sent OTP via SendGrid API to {to_email}")
-                return True
-        except Exception as e:
-            print(f"Failed to send email via SendGrid API: {e}")
-            # DO NOT return False here, allow it to fallback to the next method!
     # 3. Fallback to standard SMTP (Works locally, but blocked on Render Free Tier)
     smtp_server = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
     smtp_port = int(os.environ.get("SMTP_PORT", 587))

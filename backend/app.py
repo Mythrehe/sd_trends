@@ -786,14 +786,15 @@ import json
 
 
 def send_smtp_email(to_email, subject, body_text):
-    import requests
+    import urllib.request
+    import json
     import os
 
-    # 1. Try sending via Resend API (HTTP REST over port 443, never blocked by Render)
-    resend_api_key = os.environ.get("RESEND_API_KEY")
-    if resend_api_key:
-        print("Attempting email transmission via Resend HTTP API...")
-
+    # 1. Try sending via Brevo HTTP API (HTTP REST over port 443, never blocked by Render)
+    brevo_api_key = os.environ.get("BREVO_API_KEY")
+    if brevo_api_key:
+        print("Attempting email transmission via Brevo HTTP API...")
+        
         # HTML content template
         html_content = f"""
         <!DOCTYPE html>
@@ -862,34 +863,33 @@ def send_smtp_email(to_email, subject, body_text):
         </html>
         """
 
-        # Resend's free tier default domain is 'onboarding@resend.dev'
-        sender = os.environ.get("MAIL_DEFAULT_SENDER", "onboarding@resend.dev")
-        print(f"sender: {sender}")
-
-        url = "https://api.resend.com/emails"
+        sender = os.environ.get("MAIL_DEFAULT_SENDER", "noreply@sdtrends.com")
+        
+        url = "https://api.brevo.com/v3/smtp/email"
         headers = {
-            "Authorization": f"Bearer {resend_api_key}",
-            "Content-Type": "application/json",
+            "accept": "application/json",
+            "api-key": brevo_api_key,
+            "content-type": "application/json",
         }
-        payload = {
-            "from": f"SD Trends <{sender}>",
-            "to": [to_email],
+        data = {
+            "sender": {"name": "SD Trends", "email": sender},
+            "to": [{"email": to_email}],
             "subject": subject,
-            "html": html_content,
-            "text": body_text,
+            "htmlContent": html_content,
         }
 
         try:
-            res = requests.post(url, json=payload, headers=headers)
-            if res.status_code in [200, 201]:
-                print(f"Successfully sent Resend email to {to_email}")
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(data).encode("utf-8"),
+                headers=headers,
+                method="POST",
+            )
+            with urllib.request.urlopen(req) as response:
+                print(f"Successfully sent Brevo email to {to_email}")
                 return True
-            else:
-                print(
-                    f"Failed to send via Resend API: {res.status_code} - {res.text}. Trying SMTP fallback..."
-                )
         except Exception as e:
-            print(f"Resend HTTP exception: {e}. Trying SMTP fallback...")
+            print(f"Brevo HTTP exception: {e}. Trying SMTP fallback...")
 
     # 2. Fallback to Standard SMTP (for Local development where port 587 is unblocked)
     import smtplib

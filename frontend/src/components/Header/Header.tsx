@@ -14,8 +14,12 @@ interface HeaderProps {
   promo?: any;
 }
 
-export default function Header({ categories: initialCategories = [], promo: initialPromo = null }: HeaderProps) {
+export default function Header({ categories = [], promo = null }: HeaderProps) {
   const pathname = usePathname();
+  
+  // Debug log for client-side hydration/rendering
+  console.log("Header client component rendering. Categories:", categories);
+
   const {
     cart,
     wishlist,
@@ -29,11 +33,9 @@ export default function Header({ categories: initialCategories = [], promo: init
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
-  const [categories, setCategories] = useState<any[]>(initialCategories);
   const [showCartDropdown, setShowCartDropdown] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
-  const [promo, setPromo] = useState<any>(initialPromo);
 
   const searchRef = useRef(null);
   const cartRef = useRef(null);
@@ -147,7 +149,11 @@ export default function Header({ categories: initialCategories = [], promo: init
                   <div className={styles.megaDropdownContainer}>
                     {categories.map((cat, idx) => (
                       <div key={cat.id} className={styles.megaColumn}>
-                        <h3 className={styles.megaTitle}>{cat.name}</h3>
+                        <h3 className={styles.megaTitle}>
+                          <Link href={`/shop?category=${encodeURIComponent(cat.name)}`}>
+                            {cat.name}
+                          </Link>
+                        </h3>
                         <ul className={styles.megaList}>
                           {cat.subcategories?.map((sub: any) => (
                             <li key={sub.id}>
@@ -348,26 +354,54 @@ export default function Header({ categories: initialCategories = [], promo: init
           </button>
 
           {mobileCategoriesOpen && (
-            <div className={styles.mobileCategoriesDropdown}>
+            <div 
+              className={styles.mobileCategoriesDropdown}
+              style={{ 
+                borderLeft: '2px solid #E6E4DF', 
+                paddingLeft: '1rem', 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '1.25rem', 
+                marginTop: '0.5rem',
+                flexShrink: 0,
+                height: 'auto',
+                minHeight: 'min-content',
+                visibility: 'visible',
+                opacity: 1
+              }}
+            >
               {categories.map((cat, idx) => (
-                <div key={cat.id} className={styles.mobileCategoryGroup}>
-                  <h4 className={styles.mobileCategoryTitle}>{cat.name}</h4>
-                  <ul className={styles.mobileCategoryList}>
-                    {cat.subcategories.map((sub: any) => (
-                      <li key={sub.id}>
-                        <Link 
-                          href={`/shop?subcategory=${encodeURIComponent(sub.name)}`}
-                          onClick={() => {
-                            setMobileMenuOpen(false);
-                            setMobileCategoriesOpen(false);
-                          }}
-                          className={styles.mobileCategoryLink}
-                        >
-                          {sub.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                <div key={cat.id} className={styles.mobileCategoryGroup} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexShrink: 0 }}>
+                  <h4 className={styles.mobileCategoryTitle}>
+                    <Link 
+                      href={`/shop?category=${encodeURIComponent(cat.name)}`}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setMobileCategoriesOpen(false);
+                      }}
+                      style={{ color: '#1C1B19', display: 'block', fontSize: '0.85rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.05em', textAlign: 'left' }}
+                    >
+                      {cat.name}
+                    </Link>
+                  </h4>
+                  {cat.subcategories && cat.subcategories.length > 0 && (
+                    <ul className={styles.mobileCategoryList}>
+                      {cat.subcategories.map((sub: any) => (
+                        <li key={sub.id}>
+                          <Link 
+                            href={`/shop?subcategory=${encodeURIComponent(sub.name)}`}
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setMobileCategoriesOpen(false);
+                            }}
+                            className={styles.mobileCategoryLink}
+                          >
+                            {sub.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ))}
             </div>

@@ -665,6 +665,18 @@
   padding-bottom: 6px;
 }
 
+.megaTitle a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  transition: color var(--transition-fast);
+}
+
+.megaTitle a:hover {
+  color: var(--accent-gold);
+}
+
 .megaList {
   list-style: none;
   padding: 0;
@@ -793,6 +805,18 @@
   letter-spacing: 0.05em;
   margin: 0;
   text-align: left;
+}
+
+.mobileCategoryTitle a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  transition: color var(--transition-fast);
+}
+
+.mobileCategoryTitle a:hover {
+  color: var(--text-primary);
 }
 
 .mobileCategoryList {

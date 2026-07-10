@@ -39,11 +39,14 @@ export const viewport = {
 
 async function fetchLayoutData() {
   try {
-    const res = await fetch(`${API_BASE_URL}/layout-data`, {
-      next: { revalidate: 300 } // Cache for 5 minutes
+    const url = `${API_BASE_URL}/layout-data`;
+    console.log("Next.js Server: Fetching layout data from:", url);
+    const res = await fetch(url, {
+      cache: 'no-store'
     });
-    if (!res.ok) throw new Error('Failed to fetch layout data');
+    if (!res.ok) throw new Error(`Failed to fetch layout data (Status: ${res.status})`);
     const data = await res.json();
+    console.log("Next.js Server: Successfully loaded layout data. Categories count:", Array.isArray(data.categories) ? data.categories.length : 0);
     return {
       categories: Array.isArray(data.categories) ? data.categories : [],
       settings: data.settings || {},
@@ -51,7 +54,7 @@ async function fetchLayoutData() {
       promo: data.promo || null
     };
   } catch (err) {
-    console.error("Failed to load layout data", err);
+    console.error("Next.js Server: Failed to load layout data:", err);
     return {
       categories: [],
       settings: {},
@@ -63,6 +66,7 @@ async function fetchLayoutData() {
 
 export default async function RootLayout({ children }) {
   const layoutData = await fetchLayoutData();
+  console.log("Next.js Server: RootLayout rendering with", layoutData.categories.length, "categories");
 
   return (
     <html lang="en" className={`${roboto.variable} ${playfair.variable} ${oswald.variable}`}>

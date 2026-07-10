@@ -5,8 +5,8 @@ import { API_BASE_URL } from '@/config';
 async function fetchShopData() {
   try {
     const [catsRes, prodsRes] = await Promise.all([
-      fetch(`${API_BASE_URL}/content/categories/hierarchy`, { next: { revalidate: 300 } }),
-      fetch(`${API_BASE_URL}/products`, { next: { revalidate: 300 } })
+      fetch(`${API_BASE_URL}/content/categories/hierarchy`, { cache: 'no-store' }),
+      fetch(`${API_BASE_URL}/products`, { cache: 'no-store' })
     ]);
     
     const categories = catsRes.ok ? await catsRes.json() : [];
